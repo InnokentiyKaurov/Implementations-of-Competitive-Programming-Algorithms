@@ -14,7 +14,7 @@ using namespace std;
 
 // DSU
 // Clear: makeset()
-const int N = 2e5 + 10;
+const int N = 2e5 + 10; // Change the constant!
 struct DSU{
   int sz[N], par[N];
 
@@ -40,7 +40,7 @@ struct DSU{
 
 // Sparse Table
 // Clear: build()
-const int N = 2e5 + 10, LOG = 20;
+const int N = 2e5 + 10, LOG = 20; // Change the constant!
 template<typename T>
 struct SparseTable{
   int lg[N];
@@ -73,7 +73,7 @@ struct SparseTable{
 
 // Normal SegTree
 // Clear: clear() or build()
-const int N = 2e5 + 10;
+const int N = 2e5 + 10; // Change the constant!
 template<typename T>
 struct SegTree{
   T t[4 * N];
@@ -147,7 +147,7 @@ struct SegTree{
 
 // Lazy Propagation SegTree
 // Clear: clear() or build()
-const int N = 2e5 + 10;
+const int N = 2e5 + 10; // Change the constant!
 template<typename T>
 struct LazySegTree{
   T t[4 * N];
