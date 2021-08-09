@@ -155,7 +155,7 @@ struct LazySegTree{
   int n;
 
   // Change these functions, default return, and lazy mark.
-  T default_return = 0, lazy_mark = -1;
+  T default_return = 0, lazy_mark = numeric_limits<T>::min();
   // Lazy mark is how the algorithm will identify that no propagation is needed.
   function<T(T, T)> f = [&] (T a, T b){
     return a + b;
