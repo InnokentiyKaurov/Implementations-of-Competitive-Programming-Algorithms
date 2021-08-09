@@ -136,7 +136,8 @@ struct SegTree{
   T get(int pos){
     return query(pos, pos);
   }
-
+  
+  // Change clear() function to t.clear() if using unordered_map for SegTree!!!
   void clear(int n_){
     n = n_;
     for (int i = 0; i <= 4 * n; i++) t[i] = 0;
@@ -246,7 +247,8 @@ struct LazySegTree{
   T get(int pos){
     return query(pos, pos);
   }
-
+  
+  // Change clear() function to t.clear() if using unordered_map for SegTree!!!
   void clear(int n_){
     n = n_;
     for (int i = 0; i <= 4 * n; i++) t[i] = 0, lazy[i] = lazy_mark;
