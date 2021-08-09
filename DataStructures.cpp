@@ -132,6 +132,10 @@ struct SegTree{
   T query(int l, int r){
     return query(0, 0, n - 1, l, r);
   }
+  
+  T get(int pos){
+    return query(pos, pos);
+  }
 
   void clear(int n_){
     n = n_;
@@ -230,13 +234,17 @@ struct LazySegTree{
       query(2 * v + 2, tm + 1, tr, max(l, tm + 1), r)
     );
   }
-
+  
   void modify(int l, int r, T val){
     modify(0, 0, n - 1, l, r, val);
   }
 
   T query(int l, int r){
     return query(0, 0, n - 1, l, r);
+  }
+  
+  T get(int pos){
+    return query(pos, pos);
   }
 
   void clear(int n_){
