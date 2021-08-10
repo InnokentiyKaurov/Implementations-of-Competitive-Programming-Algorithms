@@ -140,7 +140,7 @@ struct SegTree{
   // Change clear() function to t.clear() if using unordered_map for SegTree!!!
   void clear(int n_){
     n = n_;
-    for (int i = 0; i <= 4 * n; i++) t[i] = 0;
+    for (int i = 0; i < 4 * n; i++) t[i] = 0;
   }
 
   void build(vector<T>& a){
@@ -251,7 +251,7 @@ struct LazySegTree{
   // Change clear() function to t.clear() if using unordered_map for SegTree!!!
   void clear(int n_){
     n = n_;
-    for (int i = 0; i <= 4 * n; i++) t[i] = 0, lazy[i] = lazy_mark;
+    for (int i = 0; i < 4 * n; i++) t[i] = 0, lazy[i] = lazy_mark;
   }
 
   void build(vector<T>& a){
