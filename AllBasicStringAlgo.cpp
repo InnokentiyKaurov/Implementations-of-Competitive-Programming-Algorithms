@@ -28,7 +28,7 @@ struct HT{
   }
 };
 
-// Prefix Function & KMP
+// Prefix Function, KMP, Prefix Automaton
 
 vector<int> pf(string& s){
   int n = sz(s);
@@ -53,6 +53,25 @@ vector<int> kmp(string& s, string& k){
     }
   }
   return res;
+}
+
+// Converts character to integer value (change depending on situation).
+int ctoi(char c){
+  return c - 'a';
+}
+
+// Sigma is the size of the alphabet.
+vector<vector<int>> prefix_automaton(string& s, int sigma){
+  int n = sz(s) + 1;
+  vector<vector<int>> aut(n, vector<int>(sigma));
+  auto pi = pf(s);
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < sigma; j++){
+      if (ctoi(s[i]) == j) aut[i][j] = i + 1;
+      else aut[i][j] = (i? aut[pi[i - 1]][j] : 0);
+    }
+  }
+  return aut;
 }
 
 // Z - Function
