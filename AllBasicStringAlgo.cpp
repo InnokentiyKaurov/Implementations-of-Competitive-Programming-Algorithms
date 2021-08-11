@@ -103,7 +103,7 @@ struct Node{
   }
 };
 
-vector<Node> trie;
+vector<Node> trie(1);
 
 void add_str(string& s){
   int v = 0;
