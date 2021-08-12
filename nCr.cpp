@@ -1,4 +1,4 @@
-const int N = 3e6 + 10, MOD = 1e9 + 7;
+const int N = 2e5 + 10, MOD = 1e9 + 7;
  
 int inv[N];
 int fact[N], inv_fact[N];
