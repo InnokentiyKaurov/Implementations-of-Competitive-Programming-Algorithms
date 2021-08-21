@@ -16,26 +16,26 @@ using namespace std;
 // Clear: makeset()
 const int N = 2e5 + 10; // Change the constant!
 struct DSU{
-  int sz[N], par[N];
+int sz[N], par[N];
 
-  void makeset(int a){
-    par[a] = a, sz[a] = 1;
-  }
+void makeset(int a){
+  par[a] = a, sz[a] = 1;
+}
 
-  int getset(int a){
-    return par[a] == a? a : par[a] = getset(par[a]);
-  }
+int getset(int a){
+  return par[a] == a? a : par[a] = getset(par[a]);
+}
 
-  bool same(int a, int b){
-    return getset(a) == getset(b);
-  }
+bool same(int a, int b){
+  return getset(a) == getset(b);
+}
 
-  void unite(int a, int b){
-    a = getset(a), b = getset(b);
-    if (a == b) return;
-    if (sz[a] < sz[b]) swap(a, b);
-    par[b] = a, sz[a] += sz[b];
-  }
+void unite(int a, int b){
+  a = getset(a), b = getset(b);
+  if (a == b) return;
+  if (sz[a] < sz[b]) swap(a, b);
+  par[b] = a, sz[a] += sz[b];
+}
 };
 
 // Sparse Table
@@ -43,32 +43,32 @@ struct DSU{
 const int N = 2e5 + 10, LOG = 20; // Change the constant!
 template<typename T>
 struct SparseTable{
-  int lg[N];
-  T st[N][LOG];
-  int n;
+int lg[N];
+T st[N][LOG];
+int n;
 
-  // Change this function
-  function<T(T, T)> f = [&] (T a, T b){
-    return min(a, b);
-  };
+// Change this function
+function<T(T, T)> f = [&] (T a, T b){
+  return min(a, b);
+};
 
-  void build(vector<T>& a){
-    n = sz(a);
-    lg[1] = 0;
-    for (int i = 2; i <= n; i++) lg[i] = lg[i / 2] + 1;
+void build(vector<T>& a){
+  n = sz(a);
+  lg[1] = 0;
+  for (int i = 2; i <= n; i++) lg[i] = lg[i / 2] + 1;
 
-    for (int k = 0; k < LOG; k++){
-      for (int i = 0; i < n; i++){
-        if (!k) st[i][k] = a[i];
-        else st[i][k] = f(st[i][k - 1], st[min(n - 1, i + (1 << (k - 1)))][k - 1]);
-      }
+  for (int k = 0; k < LOG; k++){
+    for (int i = 0; i < n; i++){
+      if (!k) st[i][k] = a[i];
+      else st[i][k] = f(st[i][k - 1], st[min(n - 1, i + (1 << (k - 1)))][k - 1]);
     }
   }
+}
 
-  T query(int l, int r){
-    int sz = r - l + 1;
-    return f(st[l][lg[sz]], st[r - (1 << lg[sz]) + 1][lg[sz]]);
-  }
+T query(int l, int r){
+  int sz = r - l + 1;
+  return f(st[l][lg[sz]], st[r - (1 << lg[sz]) + 1][lg[sz]]);
+}
 };
 
 // Normal SegTree
