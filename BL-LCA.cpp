@@ -1,4 +1,4 @@
-const int N = 1e5 + 10, LOG = 20;
+const int N = 2e5 + 10, LOG = 20;
  
 vector<int> g[N];
  
