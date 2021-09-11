@@ -46,7 +46,9 @@ vector<int> ans;
 bool used[N];
 
 void dfs(int v){
-  for (auto [u, id] : g[v]){
+  while (!g[v].empty()){
+    auto [u, id] = g[v].back();
+    g[v].pop_back();
     if (used[id]) continue;
     used[id] = 1;
     dfs(u);
