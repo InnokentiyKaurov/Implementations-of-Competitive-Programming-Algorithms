@@ -1,4 +1,4 @@
-// IT'S ALSO IMPORTANT TO NOTE THAT THE STARTING VERTEX IS IN THE CONNECTED COMPONENT. So sz(g[start]) > 0.
+// IT'S ALSO IMPORTANT THAT THE STARTING VERTEX IS NOT ISOLATED. So sz(g[start]) > 0.
 
 // Eulerian Cycle (Directed Graphs).
 // 1. Graph's edges must be in the same connected component (checked in the algo).
