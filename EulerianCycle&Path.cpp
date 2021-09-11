@@ -1,3 +1,5 @@
+// IT'S ALSO IMPORTANT TO NOTE THAT THE STARTING VERTEX IS IN THE CONNECTED COMPONENT.
+
 // Eulerian Cycle (Directed Graphs).
 // 1. Graph's edges must be in the same connected component (checked in the algo).
 // 2. indeg[v] = outdeg[v] for any vertex v (not checked in the algo).
