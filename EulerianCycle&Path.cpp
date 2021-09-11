@@ -76,7 +76,7 @@ int main(){
 }
 
 // Eulerian Path
-// The algo above can be used. Run DFS from one of the terminal vertices (that have odd degree).
+// The algo above can be used. Run DFS from one of the terminal vertices (that have odd degree). Don't forget to change line 69!
 // 1. Graph's edges must be in the same connected component (checked in the algo).
 // 2. Undirected: Exactly 0 or 2 vertices have odd degree, all other have even degree.
 //    Directed: Either all have indeg[x] = outdeg[x],
