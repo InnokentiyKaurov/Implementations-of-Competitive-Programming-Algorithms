@@ -17,7 +17,9 @@ order_of_key(k) - returns index of k.
 
 Remarks:
 No function "count": instead use "set.find(k) == set.end()".
-All other main set functions are present. 
+All other main set functions are present.
+Multiset doesn't have normal erase() function. You have to write:
+    set.erase(set.find_by_order(set.order_of_key(x)));
 */
 
 #include <ext/pb_ds/assoc_container.hpp> 
