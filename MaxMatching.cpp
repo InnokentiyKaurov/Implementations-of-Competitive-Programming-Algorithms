@@ -1,7 +1,7 @@
 /*
 The algorithm finds the maximum matching (by edge count) in explicitly bipartite graph.
 I.e. the graph is split into 2 halves of n1 and n2 vertices.
-Complexity: O(n1 * m). Usually runs much faster.
+Complexity: O(n1 * m). Usually runs much faster. MUCH FASTER!!!
 */
 const int N = 305;
 
