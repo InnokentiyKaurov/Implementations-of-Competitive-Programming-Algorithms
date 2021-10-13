@@ -13,7 +13,7 @@ struct edge{
   };
 };
 
-int n, m;
+int n, m; // BE CAREFUL, DON'T REDEFINE N AND M!!!
 vector<int> g[N]; // Stores the indices of the outgoing edges for each vertex.
 vector<edge> edges; // Stores the edges! To access the reverse edge of idx, use "idx ^ 1".
 int par[N]; // Stores the edge index by which each vertex was updated in BFS.
