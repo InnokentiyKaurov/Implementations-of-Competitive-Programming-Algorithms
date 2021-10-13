@@ -27,6 +27,7 @@ void add_edge(int u, int v, int cap){ // Adds a directed edge from u to v. In un
 
 ll max_flow(int s, int t){
   ll flow = 0;
+  for (auto& e : edges) e.flow = 0;
   while (true){
     for (int i = 1; i <= n; i++) par[i] = -1;
     queue<int> q;
