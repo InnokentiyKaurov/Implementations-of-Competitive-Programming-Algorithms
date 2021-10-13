@@ -33,9 +33,11 @@ int main(){
     g[a].pb(b);
   }
   for (int i = 1; i <= n2; i++) mt[i] = -1;
+  for (int i = 1; i <= n1; i++) used[i] = 0;
   for (int i = 1; i <= n1; i++){
-    for (int j = 1; j <= n1; j++) used[j] = 0;
-    try_dfs(i);
+    if (try_dfs(i)){
+      for (int j = 1; j <= n1; j++) used[j] = 0;
+    }
   }
   vector<pair<int, int>> ans;
   for (int i = 1; i <= n2; i++){
