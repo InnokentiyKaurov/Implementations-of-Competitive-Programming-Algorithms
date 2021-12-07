@@ -70,8 +70,8 @@ int main(){
     g[a].pb({b, i});
     g[b].pb({a, i});
   }
-  ans.pb(1);
-  dfs(1);
+  ans.pb(1); // For Eulerian Path, change to ans.pb(finish);
+  dfs(1); // For Eulerian Path, change to dfs(start);
   if (sz(ans) != m){
     // The graph is not connected.
   }
