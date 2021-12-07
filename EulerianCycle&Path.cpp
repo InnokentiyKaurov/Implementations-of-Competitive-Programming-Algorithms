@@ -85,3 +85,44 @@ int main(){
 // 2. Undirected: Exactly 0 or 2 vertices have odd degree, all other have even degree.
 //    Directed: Either all have indeg[x] = outdeg[x],
 //              or (one has indeg[v] - outdeg[v] = 1, and one has outdeg[u] - indeg[u] = 1, and all other have indeg[w] = outdeg[w]).
+
+// Set-up for Eulerian Path in undirected graph:
+int main(){
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+  // cout.precision(20);
+  int n, m;
+  cin >> n >> m;
+  for (int i = 0; i < m; i++){
+    int a, b;
+    cin >> a >> b;
+    g[a].pb({b, i});
+    g[b].pb({a, i});
+  }
+  int st = -1, fin = -1;
+  for (int i = 1; i <= n; i++){
+    if (sz(g[i]) & 1){
+      if (st == -1) st = i;
+      else if (fin == -1) fin = i;
+      else{
+        cout << "NO" << endl;
+        return 0;
+      }
+    }
+  }
+  if (st != -1 && fin == -1){
+    cout << "NO" << endl;
+    return 0;
+  }
+  if (st == -1) st = fin = 1;
+  ans.pb(fin); // Pay attention to these lines!!!
+  dfs(st); // Pay attention to these lines!!!
+  if (sz(ans) - 1 != m){
+    cout << "NO" << endl;
+  }
+  else{
+    cout << "YES" << endl;
+    for (auto i : ans) cout << i << " ";
+    cout << endl;
+  }
+}
