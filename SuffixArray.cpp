@@ -1,5 +1,37 @@
+const int N = 2e5 + 10, LOG = 20; // Change the constant!
+template<typename T>
+struct SparseTable{
+int lg[N];
+T st[N][LOG];
+int n;
+
+// Change this function
+function<T(T, T)> f = [&] (T a, T b){
+  return min(a, b);
+};
+
+void build(vector<T>& a){
+  n = sz(a);
+  lg[1] = 0;
+  for (int i = 2; i <= n; i++) lg[i] = lg[i / 2] + 1;
+
+  for (int k = 0; k < LOG; k++){
+    for (int i = 0; i < n; i++){
+      if (!k) st[i][k] = a[i];
+      else st[i][k] = f(st[i][k - 1], st[min(n - 1, i + (1 << (k - 1)))][k - 1]);
+    }
+  }
+}
+
+T query(int l, int r){
+  int sz = r - l + 1;
+  return f(st[l][lg[sz]], st[r - (1 << lg[sz]) + 1][lg[sz]]);
+}
+};
+
 struct SuffixArray{
   vector<int> p, c, h;
+  SparseTable<int> st;
   /*
   In the end, array c gives the position of each suffix in p
   using 1-based indexation!
@@ -10,6 +42,7 @@ struct SuffixArray{
   SuffixArray(string s){
     buildArray(s);
     buildLCP(s);
+    buildSparse();
   }
 
   void buildArray(string s){
@@ -71,5 +104,15 @@ struct SuffixArray{
     Then an RMQ Sparse Table can be built on array h
     to calculate LCP of 2 non-consecutive suffixes.
     */
+  }
+
+  void buildSparse(){
+    st.build(h);
+  }
+
+  int lcp(int l, int r){
+    l = c[l] - 1, r = c[r] - 1;
+    if (l > r) swap(l, r);
+    return st.query(l, r - 1);
   }
 };
