@@ -8,7 +8,6 @@ struct Node{
   vector<int> nxt;
   Node() {
     nxt.assign(S, -1);
-    cnt = 0;
   }
 };
 
