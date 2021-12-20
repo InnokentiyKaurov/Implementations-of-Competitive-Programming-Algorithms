@@ -1,5 +1,5 @@
 // An algorithm for computing the sum of values over all subsets of a set.
-// a[MASK] stores the value of the set MASK, and at the end f[MASK] will store the sum of all a[i]'s, such that i is a submask of MASK.
+// a[MASK] stores the value of the set MASK, and at the end f[MASK] will store the sum of all a[i] such that i is a submask of MASK.
 // dp[i][mask] - all bits up to i may differ, but the remaining (n - 1 - i) bits will stay the same. Further reading: https://codeforces.com/blog/entry/45223
 // Complexity: O(n * 2 ^ n).
 
