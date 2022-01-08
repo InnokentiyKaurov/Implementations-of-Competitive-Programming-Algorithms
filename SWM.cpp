@@ -33,4 +33,8 @@ struct SWM{
   void clear(){
     dq_have.clear(), dq_f.clear();
   }
+
+  int size(){
+    return dq_have.size();
+  }
 };
