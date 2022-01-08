@@ -11,6 +11,7 @@ using namespace std;
 #define endl '\n'
 
 // USE THESE DATA STRUCTURES GLOBALLY!!!
+// Data Structures here: Disjoint Set Union, Sparse Table, Segment Tree, Lazy Propagation Segment Tree.
 
 // DSU
 // Clear: makeset()
