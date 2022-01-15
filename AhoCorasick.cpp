@@ -18,7 +18,7 @@ struct Node{
 vector<Node> trie(1);
 
 // add_str returns the terminal vertex.
-int add_str(string& s){
+int add_string(string& s){
   int v = 0;
   for (auto c : s){
     int cur = ctoi(c);
