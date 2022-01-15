@@ -58,6 +58,10 @@ void inc(int v, int tl, int tr, int pos, int val){
   t[v] = max(t[lc], t[rc]);
 }
 
+void inc(int v, int val){
+  inc(0, 0, n - 1, pos[v], val);
+}
+
 int rmq(int v, int tl, int tr, int l, int r){
   if (l > r) return 0;
   if (tl == l && tr == r){
@@ -97,7 +101,7 @@ int main(){
     char c;
     int u, v;
     cin >> c >> u >> v;
-    if (c == 'I') inc(0, 0, n - 1, pos[u], v);
+    if (c == 'I') inc(u, v);
     else cout << getans(u, v) << endl;
   }
 }
