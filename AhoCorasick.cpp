@@ -17,7 +17,7 @@ struct Node{
 
 vector<Node> trie(1);
 
-// add_str returns the terminal vertex.
+// add_string returns the terminal vertex.
 int add_string(string& s){
   int v = 0;
   for (auto c : s){
