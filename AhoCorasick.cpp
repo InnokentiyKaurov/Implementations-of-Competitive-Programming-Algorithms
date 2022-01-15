@@ -60,3 +60,15 @@ void add_links(){
     }
   }
 }
+
+bool is_terminal(int v){
+  return trie[v].terminal;
+}
+
+int get_link(int v){
+  return trie[v].link;
+}
+
+int go(int v, char c){
+  return trie[v].nxt[ctoi(c)];
+}
