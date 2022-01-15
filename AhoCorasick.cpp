@@ -8,9 +8,10 @@ int ctoi(char c){
 struct Node{
   vector<int> nxt;
   int link;
+  bool terminal;
 
   Node() {
-    nxt.assign(S, -1), link = 0;
+    nxt.assign(S, -1), link = 0, terminal = 0;
   }
 };
 
@@ -27,6 +28,7 @@ int add_str(string& s){
     }
     v = trie[v].nxt[cur];
   }
+  trie[v].terminal = 1;
   return v;
 }
 
