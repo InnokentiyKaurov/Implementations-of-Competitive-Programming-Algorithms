@@ -17,6 +17,7 @@ vector<pair<int, int>> g[N];
 int sz[N], dep[N], par[N];
 int root[N], pos[N];
 vector<int> a;
+vector<pair<int, int>> edges;
  
 bool comp(pair<int, int> a, pair<int, int> b){
   return sz[a.fi] < sz[b.fi];
@@ -75,6 +76,10 @@ void modify(int v, int tl, int tr, int pos, int val){
   else modify(rc, tm + 1, tr, pos, val);
   t[v] = max(t[lc], t[rc]);
 }
+
+void modify(int idx, int val){
+  modify(0, 0, n - 1, pos[dep[edges[idx].fi] > dep[edges[idx].se]? edges[idx].fi : edges[idx].se], val);
+}
  
 int rmq(int v, int tl, int tr, int l, int r){
   if (l > r) return 0;
@@ -100,7 +105,6 @@ int getans(int u, int v){
  
 void solve(){
   cin >> n;
-  vector<pair<int, int>> edges;
   for (int i = 1; i < n; i++){
     int a, b, c;
     cin >> a >> b >> c;
@@ -118,7 +122,7 @@ void solve(){
     if (s == "DONE") break;
     cin >> a >> b;
     if (s == "QUERY") cout << getans(a, b) << endl;
-    else modify(0, 0, n - 1, pos[dep[edges[a - 1].fi] > dep[edges[a - 1].se]? edges[a - 1].fi : edges[a - 1].se], b);
+    else modify(a - 1, b);
   }
   a.clear();
   for (int i = 0; i < N; i++){
@@ -126,6 +130,7 @@ void solve(){
     g[i].clear();
   }
   for (int i = 0; i < 4 * N; i++) t[i] = 0;
+  edges.clear();
 }
  
 int main(){
