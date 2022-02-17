@@ -13,7 +13,7 @@ using namespace std;
 const int N = 1e5 + 10, INF = 2e9;
 
 vector<pair<int, int>> g[N];
-vector<int> dist(N, INF);
+vector<ll> dist(N, INF);
 
 signed main(){
   ios_base::sync_with_stdio(0);
