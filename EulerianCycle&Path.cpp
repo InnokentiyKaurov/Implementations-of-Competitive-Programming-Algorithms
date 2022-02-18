@@ -1,4 +1,5 @@
 // IT'S ALSO IMPORTANT THAT THE STARTING VERTEX IS NOT ISOLATED. So sz(g[start]) > 0.
+// Constant N should be greater than both the maximum number of vertices and edges.
 
 // Eulerian Cycle (Directed Graphs).
 // 1. Graph's edges must be in the same connected component (checked in the algo).
