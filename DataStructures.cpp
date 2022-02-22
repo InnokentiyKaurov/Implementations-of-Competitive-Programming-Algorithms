@@ -262,9 +262,71 @@ struct LazySegTree{
   }
 };
 
-int main(){
-  ios_base::sync_with_stdio(0);
-  cin.tie(0);
-  // cout.precision(20);
+// Li-Chao Segment Tree: allows to add linear functions in any order and query minimum/maximum value of those at a point, all in O(log n).
+// Clear: clear()
+const ll INF = 1e18; // Change the constant!
+struct LiChaoTree{
+  struct line{
+    ll k, b;
+    line(){
+      k = b = 0;
+    };
+    line(ll k_, ll b_){
+      k = k_, b = b_;
+    };
+    ll f(ll x){
+      return k * x + b;
+    };
+  };
+  int n;
+  bool minimum, on_points;
+  vector<ll> pts;
+  vector<line> t;
+
+  void clear(){
+    for (auto& l : t) l.k = 0, l.b = minimum? INF : -INF;
+  }
   
-}
+  LiChaoTree(int n_, bool min_){ // This is a default constructor for numbers in range [0, n - 1].
+    n = n_, minimum = min_, on_points = false;
+    t.resize(4 * n);
+    clear();
+  };
+
+  LiChaoTree(vector<ll> pts_, bool min_){ // This constructor will build LCT on the set of points you pass. The points may be in any order and contain duplicates.
+    pts = pts_, minimum = min_;
+    sort(all(pts));
+    pts.erase(unique(all(pts)), pts.end());
+    on_points = true;
+    n = sz(pts);
+    t.resize(4 * n);
+    clear();
+  };
+
+  void add_line(int v, int l, int r, line nl){
+    // Adding on segment [l, r)
+    int m = (l + r) / 2;
+    ll lval = on_points? pts[l] : l, mval = on_points? pts[m] : m;
+    if ((minimum && nl.f(mval) < t[v].f(mval)) || (!minimum && nl.f(mval) > t[v].f(mval))) swap(t[v], nl);
+    if (r - l == 1) return;
+    if ((minimum && nl.f(lval) < t[v].f(lval)) || (!minimum && nl.f(lval) > t[v].f(lval))) add_line(2 * v + 1, l, m, nl);
+    else add_line(2 * v + 2, m, r, nl);
+  }
+
+  ll get(int v, int l, int r, int x){
+    int m = (l + r) / 2;
+    if (r - l == 1) return t[v].f(on_points? pts[x] : x);
+    else{
+      if (minimum) return min(t[v].f(on_points? pts[x] : x), x < m? get(2 * v + 1, l, m, x) : get(2 * v + 2, m, r, x));
+      else return max(t[v].f(on_points? pts[x] : x), x < m? get(2 * v + 1, l, m, x) : get(2 * v + 2, m, r, x));
+    }
+  }
+
+  void add_line(ll k, ll b){
+    add_line(0, 0, n, line(k, b));
+  }
+
+  ll get(ll x){
+    return get(0, 0, n, on_points? lower_bound(all(pts), x) - pts.begin() : x);
+  }; // Always pass the actual value of x, even if LCT is on points.
+};
