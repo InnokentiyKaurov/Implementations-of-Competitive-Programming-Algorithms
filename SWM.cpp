@@ -37,4 +37,8 @@ struct SWM{
   int size(){
     return dq_have.size();
   }
+
+  bool empty(){
+    return dq_have.empty();
+  }
 };
