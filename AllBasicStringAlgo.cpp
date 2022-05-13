@@ -30,7 +30,7 @@ struct HT{
 
 // Prefix Function, KMP, Prefix Automaton
 
-vector<int> pf(string& s){
+vector<int> pf(string s){
   int n = sz(s);
   vector<int> pi(n);
   for (int i = 1; i < n; i++){
@@ -43,7 +43,7 @@ vector<int> pf(string& s){
   return pi;
 }
 
-vector<int> kmp(string& s, string& k){
+vector<int> kmp(string s, string k){
   string st = k + "#" + s;
   vector<int> res;
   auto pi = pf(st);
@@ -61,7 +61,7 @@ int ctoi(char c){
 }
 
 // Sigma is the size of the alphabet.
-vector<vector<int>> prefix_automaton(string& s, int sigma){
+vector<vector<int>> prefix_automaton(string s, int sigma){
   int n = sz(s) + 1;
   vector<vector<int>> aut(n, vector<int>(sigma));
   auto pi = pf(s);
@@ -76,7 +76,7 @@ vector<vector<int>> prefix_automaton(string& s, int sigma){
 
 // Z - Function
 
-vector<int> zf(string& s){
+vector<int> zf(string s){
   int n = sz(s);
   vector<int> z(n);
   int l = 0, r = 0;
@@ -105,7 +105,7 @@ struct Node{
 
 vector<Node> trie(1);
 
-void add_str(string& s){
+void add_str(string s){
   int v = 0;
   for (auto c : s){
     int cur = c - 'a';
