@@ -1,5 +1,6 @@
 // Convex Hull Trick. Allows to insert a linear function to the hull in Ө(1) and get the minimum/maximum value of the stored function at a point in O(log n).
 // NOTE: The lines must be added in the order of decreasing/increasing gradients. CAREFULLY CHECK THE SETUP BEFORE USING!
+// IMPORTANT: THE DEFAULT VERSION SURELY WORKS. IF MODIFIED VERSIONS DON'T WORK, TRY TRANSFORMING THEM TO THE DEFAULT ONE BY CHANGING SIGNS.
 struct line{
   ll k, b;
   ll f(ll x){
