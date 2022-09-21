@@ -1,4 +1,4 @@
-// Sliding Window Minimum data structure
+// Sliding Window Minimum (Minimum Queue) data structure
 // Supports 3 deque operations and allows to retrieve the minimum of the stored values, all in Ө(1).
 template<typename T>
 struct SWM{
