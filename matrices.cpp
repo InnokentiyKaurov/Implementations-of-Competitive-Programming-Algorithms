@@ -1,3 +1,5 @@
+// IF POSSIBLE, TRY IMPLEMENT MATRIX THROUGH STATIC ARRAYS!!! WORKS MUCH MUCH FASTER THAN THE CURRENT TEMPLATE WITH VECTORS!
+
 #pragma GCC optimize("O3")
 #include <bits/stdc++.h>
 using namespace std;
