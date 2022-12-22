@@ -31,7 +31,7 @@ int lca(int u, int v){
 
 
 
-// Binary Lifting by Both Verticex.
+// Binary Lifting by Both Vertices.
 // Main benefit: doesn't use tin & tout, which allows tree modifications.
 const int N = 2e5 + 10, LOG = 20;
  
