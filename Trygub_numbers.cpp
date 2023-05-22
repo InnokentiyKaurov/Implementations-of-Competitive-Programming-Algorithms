@@ -1,3 +1,9 @@
+// Trygub numbers: maintaining a large number with a custom base.
+// All the digits are stored on the interval (-base, +base).
+// Operations:
+// 1. Add x * base^y : amortized O(log n * log x / log base). x can be negative.
+// 2. Get digit on position k: O (log n). The digit returned is in standard form: [0, +base)
+// n is the maximum number of digits.
 const int base = 1 << 30;
 
 map<int, ll> dig;
