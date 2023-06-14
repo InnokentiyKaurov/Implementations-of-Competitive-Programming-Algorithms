@@ -5,7 +5,7 @@ using namespace std;
 #define ll long long
 #define ld long double
 #define pb push_back
-#define sz(x) int((x).size())
+#define sz(x) (int)(x).size()
 #define fi first
 #define se second
 #define endl '\n'
@@ -83,7 +83,7 @@ T vmul(const TPoint<T>& a, const TPoint<T>& b){
  
 template<typename T>
 bool parallel(const TLine<T>& l1, const TLine<T>& l2){
-  return abs(vmul(TPoint(l1.a, l1.b), TPoint(l2.a, l2.b))) <= TPoint<T>::eps;
+  return abs(vmul(TPoint<T>(l1.a, l1.b), TPoint<T>(l2.a, l2.b))) <= TPoint<T>::eps;
 }
  
 template<typename T>
@@ -125,7 +125,7 @@ T dist_pp(const TPoint<T>& a, const TPoint<T>& b){
 template<typename T>
 TLine<T> perp_line(const TLine<T>& l, const TPoint<T>& p){
   T na = -l.b, nb = l.a, nc = - na * p.x - nb * p.y;
-  return TLine(na, nb, nc);
+  return TLine<T>(na, nb, nc);
 }
  
 template<typename T>
@@ -144,7 +144,7 @@ struct TRay{
   TPoint<T> start, dirvec;
   TRay() : l(), start(), dirvec() {}
   TRay(const TPoint<T>& p1, const TPoint<T>& p2){
-    l = TLine(p1, p2);
+    l = TLine<T>(p1, p2);
     start = p1, dirvec = p2 - p1;
   }
 };
@@ -157,14 +157,14 @@ bool is_on_line(const TPoint<T>& p, const TLine<T>& l){
 template<typename T>
 bool is_on_ray(const TPoint<T>& p, const TRay<T>& r){
   if (is_on_line(p, r.l)){
-    return sign(smul(r.dirvec, TPoint(p - r.start))) != -1;
+    return sign(smul(r.dirvec, TPoint<T>(p - r.start))) != -1;
   }
   else return false;
 }
  
 template<typename T>
 bool is_on_seg(const TPoint<T>& P, const TPoint<T>& A, const TPoint<T>& B){
-  return is_on_ray(P, TRay(A, B)) && is_on_ray(P, TRay(B, A));
+  return is_on_ray(P, TRay<T>(A, B)) && is_on_ray(P, TRay<T>(B, A));
 }
  
 template<typename T>
@@ -175,7 +175,7 @@ T dist_pr(const TPoint<T>& P, const TRay<T>& R){
 
 template<typename T>
 T dist_ps(const TPoint<T>& P, const TPoint<T>& A, const TPoint<T>& B){
-  auto H = projection(P, TLine(A, B));
+  auto H = projection(P, TLine<T>(A, B));
   if (is_on_seg(H, A, B)) return dist_pp(P, H);
   else return min(dist_pp(P, A), dist_pp(P, B));
 }
@@ -240,7 +240,7 @@ int in_convex_poly(TPoint<T>& p, vector<TPoint<T>>& pts){
 
 // 0 - Outside, 1 - Exclusively Inside, 2 - On the Border
 template<typename T>
-int in_simple_poly(TPoint<T>& p, vector<TPoint<T>>& pts){
+int in_simple_poly(TPoint<T> p, vector<TPoint<T>>& pts){
   int n = sz(pts);
   bool res = 0;
   for (int i = 0; i < n; i++){
@@ -252,13 +252,46 @@ int in_simple_poly(TPoint<T>& p, vector<TPoint<T>>& pts){
   }
   return res;
 }
+
+template<typename T>
+void minkowski_rotate(vector<TPoint<T>>& P){
+  int pos = 0;
+  for (int i = 1; i < sz(P); i++){
+    if (abs(P[i].y - P[pos].y) <= TPoint<T>::eps){
+      if (P[i].x < P[pos].x) pos = i;
+    }
+    else if (P[i].y < P[pos].y) pos = i;
+  }
+  rotate(P.begin(), P.begin() + pos, P.end());
+}
+
+// P and Q are strictly convex, points given in counterclockwise order
+template<typename T>
+vector<TPoint<T>> minkowski_sum(vector<TPoint<T>> P, vector<TPoint<T>> Q){
+  minkowski_rotate(P);
+  minkowski_rotate(Q);
+  P.pb(P[0]);
+  Q.pb(Q[0]);
+  vector<TPoint<T>> ans;
+  int i = 0, j = 0;
+  while (i < sz(P) - 1 || j < sz(Q) - 1){
+    ans.pb(P[i] + Q[j]);
+    T curmul;
+    if (i == sz(P) - 1) curmul = -1;
+    else if (j == sz(Q) - 1) curmul = +1;
+    else curmul = vmul(P[i + 1] - P[i], Q[j + 1] - Q[j]);
+    if (abs(curmul) < TPoint<T>::eps || curmul > 0) i++;
+    if (abs(curmul) < TPoint<T>::eps || curmul < 0) j++;
+  }
+  return ans;
+}
  
 using Point = TPoint<ll>;
 using Line = TLine<ll>;
 using Ray = TRay<ll>;
 const ld PI = acos(-1);
 
-int main(){
+signed main(){
   ios_base::sync_with_stdio(0);
   cin.tie(0);
   // cout.precision(20);
