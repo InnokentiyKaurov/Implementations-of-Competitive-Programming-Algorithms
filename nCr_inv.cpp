@@ -15,5 +15,6 @@ void precalc(){
 }
  
 ll ncr(int n, int r){
+  if (r > n || r < 0) return 0;
   return (fact[n] * 1ll * ((inv_fact[r] * 1ll * inv_fact[n - r]) % MOD)) % MOD;
 }
