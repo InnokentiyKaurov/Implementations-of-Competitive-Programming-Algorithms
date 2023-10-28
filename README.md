@@ -1,5 +1,5 @@
 # Implementations of Competitive Programming Algorithms
-In this repository, you will find my own tested implementations of various CP algorithms.\
+In this repository, you will find my own tested implementations of various CP algorithms.
 ## Clarifications regarding the contents of files with multiple algorithms
 **BasicGeometry.cpp** contains: basic operations with points/lines/segments/rays, convex hull construction, point location in simple/convex polygons, Minkowski sum.
 
