@@ -268,6 +268,8 @@ void minkowski_rotate(vector<TPoint<T>>& P){
 // P and Q are strictly convex, points given in counterclockwise order
 template<typename T>
 vector<TPoint<T>> minkowski_sum(vector<TPoint<T>> P, vector<TPoint<T>> Q){
+  if (P.empty()) return Q;
+  if (Q.empty()) return P;
   minkowski_rotate(P);
   minkowski_rotate(Q);
   P.pb(P[0]);
@@ -280,8 +282,8 @@ vector<TPoint<T>> minkowski_sum(vector<TPoint<T>> P, vector<TPoint<T>> Q){
     if (i == sz(P) - 1) curmul = -1;
     else if (j == sz(Q) - 1) curmul = +1;
     else curmul = vmul(P[i + 1] - P[i], Q[j + 1] - Q[j]);
-    if (abs(curmul) < TPoint<T>::eps || curmul > 0) i++;
-    if (abs(curmul) < TPoint<T>::eps || curmul < 0) j++;
+    if (abs(curmul) <= TPoint<T>::eps || curmul > 0) i++;
+    if (abs(curmul) <= TPoint<T>::eps || curmul < 0) j++;
   }
   return ans;
 }
