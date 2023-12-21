@@ -110,6 +110,7 @@ struct SuffixArray{
     st.build(h);
   }
 
+  // l and r must be in 0-BASED INDEXATION
   int lcp(int l, int r){
     l = c[l] - 1, r = c[r] - 1;
     if (l > r) swap(l, r);
