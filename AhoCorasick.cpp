@@ -5,6 +5,7 @@ int ctoi(char c){
   return c - 'a';
 }
 
+// To add terminal links, use DFS
 struct Node{
   vector<int> nxt;
   int link;
